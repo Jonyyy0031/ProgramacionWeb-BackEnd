@@ -56,7 +56,7 @@ namespace ProgramacionWeb_Backend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellidos,CURP,FechaNacimiento")] Persona persona)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellidos,CURP,FechaNacimiento,RFC,Puestodetrabajo")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace ProgramacionWeb_Backend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellidos,CURP,FechaNacimiento")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellidos,CURP,FechaNacimiento,RFC,Puestodetrabajo")] Persona persona)
         {
             if (id != persona.Id)
             {

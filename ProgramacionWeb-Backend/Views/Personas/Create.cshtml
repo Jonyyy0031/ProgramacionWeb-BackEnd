@@ -33,6 +33,17 @@
                 <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RFC" class="control-label"></label>
+                <input asp-for="RFC" class="form-control" />
+                <span asp-validation-for="RFC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Puestodetrabajo" class="control-label"></label>
+                <input asp-for="Puestodetrabajo" class="form-control" />
+                <span asp-validation-for="Puestodetrabajo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

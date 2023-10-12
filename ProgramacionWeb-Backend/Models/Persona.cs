@@ -17,6 +17,8 @@ namespace ProgramacionWeb_Backend.Models
         public string CURP { get; set; }
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
+        public string RFC {  get; set; }
+        public string Puestodetrabajo { get; set; }
 
     }
 }
