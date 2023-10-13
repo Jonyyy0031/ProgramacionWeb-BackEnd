@@ -1,13 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using ProgramacionWeb_Backend.Models;
+using ProgramacionWeb_Backend.Services;
 using System.Net;
 using System.Net.Mail;
 
 namespace ProgramacionWeb_Backend.Controllers
 {
+   
     public class ContactoController : Controller
     {
+        private readonly IEmailSenderService _emailSender;
+
+        public ContactoController(IEmailSenderService emailSender)
+        {
+           _emailSender = emailSender;
+        }
         public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Formulario()
         {
             return View();
         }
@@ -20,6 +34,21 @@ namespace ProgramacionWeb_Backend.Controllers
             return View("Index","Contacto");
         }
 
+        [HttpPost]
+        public IActionResult EnviarFormulario(EmailViewModel model)
+        {
+            TempData["Email"] = model.Email;
+            TempData["Comentario"] = model.Mensaje;
+            var result = _emailSender.SendEmail(model.Email);
+            if (!result)
+            {
+                TempData["Email"] = null;
+                TempData["EmailError"] = "Ocurrio un error";
+            }
+            return View("Formulario", model);
+            
+        }
+
         public bool EnviarEmailSmtp(string email)
         {
             MailMessage mail = new MailMessage();
@@ -30,6 +59,7 @@ namespace ProgramacionWeb_Backend.Controllers
             smtp.Credentials = new NetworkCredential("moises.puc@shapp.mx", "Dhaserck_999");
             mail.From = new MailAddress("moises.puc@shapp.mx", "Administrador");
             mail.To.Add(email);
+            mail.Subject = "Aviso de contacto";
             mail.IsBodyHtml = true;
             mail.Body = $"Se ha contactado la persona con el correo {email} para solicitar informacion";
             smtp.Send(mail);

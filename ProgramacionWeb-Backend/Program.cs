@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProgramacionWeb_Backend.Data;
+using ProgramacionWeb_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+builder.Services.AddTransient<IEmailSenderService, EmailSenderService>();
 
 var app = builder.Build();
 
