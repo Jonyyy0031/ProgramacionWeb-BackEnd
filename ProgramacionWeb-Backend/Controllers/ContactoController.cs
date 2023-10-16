@@ -39,7 +39,7 @@ namespace ProgramacionWeb_Backend.Controllers
         {
             TempData["Email"] = model.Email;
             TempData["Comentario"] = model.Mensaje;
-            var result = _emailSender.SendEmail(model.Email);
+            var result = _emailSender.  SendEmail(model.Email);
             if (!result)
             {
                 TempData["Email"] = null;
