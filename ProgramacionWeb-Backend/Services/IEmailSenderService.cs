@@ -6,5 +6,6 @@ namespace ProgramacionWeb_Backend.Services
     {
         bool SendEmail(string email);
         bool ProcesarSolicitud(EmailViewModel model);
+        bool SendEmailWithData(MensajeViewModel model);
     }
 }

@@ -67,5 +67,31 @@ namespace ProgramacionWeb_Backend.Services
             }
             return result;
         }
+
+        public bool SendEmailWithData(MensajeViewModel model)
+        {
+            bool result = false;
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtp = new SmtpClient("mail.shapp.mx", 587);
+
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("moises.puc@shapp.mx", "Dhaserck_999");
+                mail.From = new MailAddress("moises.puc@shapp.mx", "Administrador");
+                mail.To.Add(model.Email);
+                mail.Subject = model.Subject;
+                mail.IsBodyHtml = true;
+                mail.Body = model.Content;
+                smtp.Send(mail);
+                result = true;
+            }
+            catch (Exception e)
+            {
+
+            }
+            return result;
+        }
     }
 }
